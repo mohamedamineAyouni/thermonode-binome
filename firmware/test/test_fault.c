@@ -1,75 +1,70 @@
 #include "unity.h"
 #include "fault.h"
 
-void setUp(void)
-{
-    fault_reset();
-}
-
+void setUp(void) { fault_reset(); }
 void tearDown(void) {}
 
-void test_no_fault_for_valid_sample(void)
-{
-    TEST_ASSERT_FALSE(fault_detect(2500, 931, true));
-}
+/* MC/DC : D = (A || B) || C */
+void test_EF05_MCDC_T1_all_false_no_fault(void)
+{ TEST_ASSERT_FALSE(fault_detect(2500, 931u, true)); }
 
-void test_fault_for_temperature_below_minimum(void)
-{
-    TEST_ASSERT_TRUE(fault_detect(-4001, 124, false));
-}
+void test_EF05_MCDC_T2_A_true(void)
+{ TEST_ASSERT_TRUE(fault_detect(-4001, 124u, false)); }
 
-void test_fault_for_temperature_above_maximum(void)
-{
-    TEST_ASSERT_TRUE(fault_detect(12507, 2173, false));
-}
+void test_EF05_MCDC_T3_B_true(void)
+{ TEST_ASSERT_TRUE(fault_detect(12507, 2173u, false)); }
 
-void test_not_frozen_before_five_identical_samples(void)
+void test_EF05_MCDC_T4_C_true_frozen_five(void)
 {
     for (int i = 0; i < 4; i++) {
-        TEST_ASSERT_FALSE(fault_detect(2500, 931, true));
+        TEST_ASSERT_FALSE(fault_detect(2500, 931u, true));
     }
+    TEST_ASSERT_TRUE(fault_detect(2500, 931u, true));
+    TEST_ASSERT_EQUAL_UINT32(5, fault_frozen_count());
 }
 
-void test_frozen_after_five_identical_samples(void)
+void test_EF05_four_identical_then_different_is_not_frozen(void)
 {
     for (int i = 0; i < 4; i++) {
-        TEST_ASSERT_FALSE(fault_detect(2500, 931, true));
+        (void)fault_detect(2500, 931u, true);
     }
-    TEST_ASSERT_TRUE(fault_detect(2500, 931, true));
+    TEST_ASSERT_FALSE(fault_detect(2508, 932u, true));
 }
 
-void test_different_adc_resets_frozen_count(void)
+void test_EF05_recovery_after_five_valid(void)
 {
+    (void)fault_detect(12999, 2234u, false);
     for (int i = 0; i < 4; i++) {
-        (void)fault_detect(2500, 931, true);
+        (void)fault_detect(2500 + i * 8, (uint16_t)(931 + i), true);
+        TEST_ASSERT_FALSE(fault_recover_ready());
     }
-    TEST_ASSERT_FALSE(fault_detect(2500, 932, true));
+    (void)fault_detect(2540, 936u, true);
+    TEST_ASSERT_TRUE(fault_recover_ready());
 }
 
-void test_invalid_sample_resets_frozen_count(void)
+void test_EF05_invalid_in_recovery_resets_run(void)
 {
+    (void)fault_detect(12999, 2234u, false);
     for (int i = 0; i < 4; i++) {
-        (void)fault_detect(2500, 931, true);
+        (void)fault_detect(2500 + i * 8, (uint16_t)(931 + i), true);
     }
-    TEST_ASSERT_TRUE(fault_detect(13000, 931, true));
-    TEST_ASSERT_FALSE(fault_detect(2500, 931, true));
+    (void)fault_detect(12999, 2234u, false);
+    TEST_ASSERT_FALSE(fault_recover_ready());
 }
 
-void test_adc_out_of_range_is_fault(void)
-{
-    TEST_ASSERT_TRUE(fault_detect(2500, 4096, true));
-}
+void test_EF05_invalid_adc_code_is_fault(void)
+{ TEST_ASSERT_TRUE(fault_detect(0, 4096u, false)); }
 
 int main(void)
 {
     UNITY_BEGIN();
-    RUN_TEST(test_no_fault_for_valid_sample);
-    RUN_TEST(test_fault_for_temperature_below_minimum);
-    RUN_TEST(test_fault_for_temperature_above_maximum);
-    RUN_TEST(test_not_frozen_before_five_identical_samples);
-    RUN_TEST(test_frozen_after_five_identical_samples);
-    RUN_TEST(test_different_adc_resets_frozen_count);
-    RUN_TEST(test_invalid_sample_resets_frozen_count);
-    RUN_TEST(test_adc_out_of_range_is_fault);
+    RUN_TEST(test_EF05_MCDC_T1_all_false_no_fault);
+    RUN_TEST(test_EF05_MCDC_T2_A_true);
+    RUN_TEST(test_EF05_MCDC_T3_B_true);
+    RUN_TEST(test_EF05_MCDC_T4_C_true_frozen_five);
+    RUN_TEST(test_EF05_four_identical_then_different_is_not_frozen);
+    RUN_TEST(test_EF05_recovery_after_five_valid);
+    RUN_TEST(test_EF05_invalid_in_recovery_resets_run);
+    RUN_TEST(test_EF05_invalid_adc_code_is_fault);
     return UNITY_END();
 }
