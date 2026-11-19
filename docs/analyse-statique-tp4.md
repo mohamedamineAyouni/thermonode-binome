@@ -36,3 +36,15 @@ La règle 22.9 a également été signalée pendant les corrections de conversio
 Après corrections et suppressions ciblées, l’analyse MISRA ne signale plus de constat parmi les règles traitées. Les suppressions sont listées dans \`firmware/misra-suppressions.txt\` et leurs justifications sont dans \`docs/misra-deviations.md\`.
 
 La suite firmware a réussi : 76 tests, 0 échec. Les suppressions MISRA ne remplacent pas les tests fonctionnels ; elles documentent les dérogations et faux positifs retenus.
+
+## Résultats SonarQube
+
+- Version : SonarQube Community Build 26.11.0.134175.
+- Quality Gate : Passed.
+- Sécurité : A, 0 problème ouvert.
+- Fiabilité : A, 0 problème ouvert.
+- Maintenabilité : A, 0 problème ouvert.
+- Couverture importée : 62,9 % sur 191 lignes à couvrir.
+- Duplications : 0,0 % sur 256 lignes.
+- Portée : analyse Python native ; les fichiers C sont exclus de l’analyse native et les constats cppcheck sont importés.
+- Limite : le rapport JUnit est lu, mais SonarQube ne relie pas les noms de tests affichés à leurs fichiers source.
