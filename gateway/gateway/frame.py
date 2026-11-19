@@ -14,6 +14,7 @@ class FrameError(ValueError):
 
 @dataclass(frozen=True)
 class Frame:
+    """Trame ThermoNode validée et décodée."""
     node_id: str
     seq: int
     t: int
