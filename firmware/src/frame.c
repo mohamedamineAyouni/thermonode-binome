@@ -88,7 +88,7 @@ bool frame_crc_ok(const uint8_t *json, size_t len)
     }
 
     pos = (size_t)(p - json);
-    if (pos + sizeof(key) - 1u + hexlen + 1u > len) {
+    if ((pos + ((sizeof(key) - 1u) + hexlen + 1u)) > len) {
         return false;
     }
 
@@ -162,7 +162,7 @@ bool json_get_str(const uint8_t *json, size_t len,
     }
 
     n = (size_t)(e - p);
-    if (n + 1u > cap) {
+    if ((n + 1u) > cap) {
         return false;
     }
 
