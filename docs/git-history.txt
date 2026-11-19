@@ -1,0 +1,66 @@
+*   7a207c1 (HEAD -> main) merge: integrate MISRA and SonarQube work
+|\  
+| * 45b16ab (style/misra-required) docs(sonar): record ThermoNode analysis results
+| * d08c507 style(gateway): resolve Pylint findings
+| * 65c2fd4 docs(misra): add TP4 static analysis report
+| * cd81b57 docs(misra): document and suppress reviewed deviations
+| * dbdd59a style(firmware): localize single-use objects (MISRA 8.9)
+| * b42caf7 fix(frame): check errno after parsing (MISRA 22.9)
+| * 5471cdf fix(firmware): avoid casts of composite expressions (MISRA 10.8)
+| * 99268b4 fix(node): use period limit macro (MISRA 2.5)
+| * c9cf517 style(firmware): make file-scope names unique (MISRA 5.9)
+| * 1cd65da fix(frame): reset errno before numeric conversion (MISRA 22.8)
+| * 109e810 style(firmware): clarify precedence (MISRA 12.1)
+| * ccfafb8 style(frame): split declarations (MISRA 12.3)
+| * 5a75040 style(node): separate sequence increment (MISRA 13.3)
+| * 89b2e73 style(firmware): handle return values explicitly (MISRA 17.7)
+|/  
+* 266f91f docs(review): revue de MR !7 — changements demandés
+* 0bec9ad (origin/main) docs: ajoute le compte rendu TP3 en PDF
+*   ab7693e merge: DEF-08
+|\  
+| * c02db94 (fix/DEF-08-handler-dedup) fix(gateway): ignore les doublons (DEF-08, ENF-05)
+|/  
+*   05e85be merge: DEF-07
+|\  
+| * 5d238ad (fix/DEF-07-frame-validation) fix(gateway): valide type temperature et seq (DEF-07, EI-02)
+|/  
+*   a13d599 merge: DEF-06
+|\  
+| * 83cbe90 (fix/DEF-06-node-recovery) fix(node): autorise la reprise après cinq mesures valides (DEF-06, EF-05)
+|/  
+*   4c5c217 merge: DEF-05
+|\  
+| * 55cf76a (fix/DEF-05-ringbuf-capacity) fix(ringbuf): respecte la capacité de 60 trames (DEF-05, ENF-05)
+|/  
+*   961cd4a merge: DEF-04
+|\  
+| * eb2ab64 (fix/DEF-04-crc-ccitt-false) fix(frame): initialise le CRC CCITT-FALSE a FFFF (DEF-04, EI-02)
+|/  
+*   9708020 merge: DEF-03
+|\  
+| * 739d8ca (fix/DEF-03-threshold-reset) fix(threshold): reinitialise le compteur sous le seuil (DEF-03, EF-04)
+|/  
+*   8ad5a8d merge: DEF-02
+|\  
+| * 6c7b8cb (fix/DEF-02-filter-window) fix(filter): corrige la fenêtre glissante (DEF-02, EF-03)
+|/  
+*   90845f5 merge: DEF-01
+|\  
+| * a4cbd89 (fix/DEF-01-range-upper-bound) fix(convert): accept 125.00 C as valid (DEF-01, EF-05)
+|/  
+* c05da12 test(gateway): dédoublonnage ENF-05 — révèle DEF-08
+* 73b7c09 test(gateway): trames invalides EI-02 — révèle DEF-07
+* d958275 test(fault): corrige les cas MC/DC EF-05
+* 53cac6f docs(test): ajoute la table MC/DC EF-05
+* bcb86b8 test(fault): cas de défaut et limites ADC — révèle DEF-07 et DEF-08
+* e9b5d1b test(ringbuf): BVA ENF-05 — révèle DEF-05
+* a68e3ab test(frame): oracle CRC normalisé, trames, BVA tampon — révèle DEF-04
+* 2428e7f test(node): transitions d'états, horloge simulée, commandes — révèle DEF-06
+* ea0d51f test(threshold): table de décision EF-04, BVA EF-07 — révèle DEF-03
+* 64ef5cc test(hal_double): stub ADC et horloge simulée
+* 7ecfe4e test(filter): séquences EF-03 — révèle DEF-02
+* 4d71a32 test(convert): EP/BVA EF-02 EF-05 — révèle DEF-01
+* 1fc2a86 docs: journal des défauts TP3
+* 92908f8 fix(docker): create writable gateway data directory
+* 5c2c1bd TP0: squelette ThermoNode
