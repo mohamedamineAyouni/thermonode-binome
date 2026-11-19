@@ -2,6 +2,7 @@
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
+#include <stddef.h>
 #include <errno.h>
 
 uint16_t crc16_ccitt_false(const uint8_t *data, size_t len)
@@ -46,7 +47,7 @@ size_t frame_build(uint8_t *out, size_t cap, const frame_t *f)
     n = snprintf(payload, sizeof payload,
                  "{\"id\":\"%s\",\"seq\":%lu,\"t\":%lu,\"temp\":%s%ld.%02ld,\"state\":\"%s\"}",
                  f->id, (unsigned long)f->seq, (unsigned long)f->t,
-                 sign, (long)(a / 100), (long)(a % 100),
+                 sign, ((long)a / 100L), ((long)a % 100L),
                  state_name(f->state));
     if ((n <= 0) || ((size_t)n >= sizeof payload)) {
         return 0u;
@@ -74,6 +75,7 @@ bool frame_crc_ok(const uint8_t *json, size_t len)
     uint8_t tmp[TN_FRAME_MAX];
     const uint8_t *p;
     size_t pos;
+    ptrdiff_t pos_diff;
     size_t hexlen = 4u;
     size_t rest;
     uint16_t given;
@@ -88,7 +90,8 @@ bool frame_crc_ok(const uint8_t *json, size_t len)
         return false;
     }
 
-    pos = (size_t)(p - json);
+    pos_diff = p - json;
+    pos = (size_t)pos_diff;
     if ((pos + ((sizeof(key) - 1u) + hexlen + 1u)) > len) {
         return false;
     }
@@ -144,6 +147,7 @@ bool json_get_str(const uint8_t *json, size_t len,
     const char *p;
     const char *e;
     size_t n;
+    ptrdiff_t n_diff;
     int written;
 
     (void)len;
@@ -164,7 +168,8 @@ bool json_get_str(const uint8_t *json, size_t len,
         return false;
     }
 
-    n = (size_t)(e - p);
+    n_diff = e - p;
+    n = (size_t)n_diff;
     if ((n + 1u) > cap) {
         return false;
     }
