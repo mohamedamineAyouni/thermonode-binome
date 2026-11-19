@@ -2,3 +2,11 @@
 unusedFunction
 missingIncludeSystem
 *:test/*
+misra-c2012-15.5:src/* # DEV-004 : retours anticipés utilisés pour traiter les erreurs et protéger les accès
+misra-c2012-18.4:src/frame.c # DEV-005 : arithmétique de pointeurs bornée par les contrôles de longueur du parseur
+misra-c2012-21.6:src/frame.c # DEV-002 : snprintf pour sérialiser les trames JSON avec contrôle de taille
+misra-c2012-21.6:src/node.c # DEV-002 : snprintf pour sérialiser les réponses JSON avec contrôle de taille
+misra-c2012-21.1:src/main.c # DEV-006 : macro POSIX utilisée uniquement par le simulateur hôte
+misra-c2012-21.10:src/main.c # DEV-006 : API POSIX utilisée uniquement par le simulateur hôte
+misra-c2012-8.7:src/* # Faux positif : fonctions utilisées par les tests et la HAL, hors du périmètre analysé
+misra-c2012-2.5:src/main.c # DEV-006 : macro nécessaire au simulateur hôte
