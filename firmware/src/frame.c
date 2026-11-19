@@ -2,6 +2,7 @@
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
+#include <errno.h>
 
 uint16_t crc16_ccitt_false(const uint8_t *data, size_t len)
 {
@@ -92,6 +93,7 @@ bool frame_crc_ok(const uint8_t *json, size_t len)
         return false;
     }
 
+    errno = 0;
     given = (uint16_t)strtoul(
         (const char *)p + sizeof(key) - 1u, NULL, 16);
     rest = len - (pos + sizeof(key) - 1u + hexlen + 1u);
@@ -130,6 +132,7 @@ bool json_get_int(const uint8_t *json, size_t len,
         return false;
     }
 
+    errno = 0;
     *value = (int32_t)strtol(p, NULL, 10);
     return true;
 }
