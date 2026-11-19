@@ -117,6 +117,7 @@ bool json_get_int(const uint8_t *json, size_t len,
     char pat[32];
     const char *p;
     int written;
+    long parsed;
 
     (void)len;
 
@@ -136,7 +137,11 @@ bool json_get_int(const uint8_t *json, size_t len,
     }
 
     errno = 0;
-    *value = (int32_t)strtol(p, NULL, 10);
+    parsed = strtol(p, NULL, 10);
+    if ((errno != 0) || (parsed < INT32_MIN) || (parsed > INT32_MAX)) {
+        return false;
+    }
+    *value = (int32_t)parsed;
     return true;
 }
 
