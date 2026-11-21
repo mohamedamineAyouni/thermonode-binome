@@ -40,9 +40,9 @@ La poussée a utilisé `--force-with-lease` après le rebase, car celui-ci réé
 
 ## Q5 — Versionnement et gestion de configuration
 
-Le tag prévu est `v0.2.0`, pour identifier l’état du projet après les changements du TP. Une correction isolée sans changement d’interface correspondrait à une augmentation de correctif, telle que `0.1.1`. `1.0.0` marquerait une première version stable avec un engagement de compatibilité. Une modification incompatible du format de trame ICD doit être annoncée comme une évolution incompatible de l’interface et recevoir une version adaptée à cette rupture.
+Le tag `v0.2.0` a été créé après les changements de code du TP. Une correction isolée sans changement d’interface correspondrait à une augmentation de correctif, telle que `0.1.1`. `1.0.0` marquerait une première version stable avec un engagement de compatibilité. Une modification incompatible du format de trame ICD doit être annoncée comme une évolution incompatible de l’interface et recevoir une version adaptée à cette rupture.
 
-Deux pull requests ont été fusionnées dans `main` : la PR #1 regroupe les corrections MISRA, la documentation et Pylint ; la PR #2 apporte le changement d’hystérésis et sa résolution de conflit. Le TP demandait plusieurs MR séparées et des revues par un tiers. Comme le travail a été fait seul, ces revues indépendantes n’ont pas pu être réalisées, et les changements ont été regroupés dans deux PR. Cette limite est signalée plutôt que présentée comme une revue par un pair.
+Trois pull requests ont été fusionnées dans `main` : la PR #1 regroupe les corrections MISRA, la documentation et Pylint ; la PR #2 apporte le changement d’hystérésis et sa résolution de conflit ; la PR #3 ajoute le rapport final et l’historique Git. Le TP demandait plusieurs MR séparées et des revues par un tiers. Comme le travail a été fait seul, ces revues indépendantes n’ont pas pu être réalisées, les changements de code ont été regroupés dans deux PR principales, puis une troisième PR a livré les documents finaux. Cette limite est signalée plutôt que présentée comme une revue par un pair.
 
 ## Plan de réduction de dette
 
