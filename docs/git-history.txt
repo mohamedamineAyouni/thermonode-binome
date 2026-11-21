@@ -1,10 +1,13 @@
-5e61a41 (HEAD -> main) docs(tp4): add final report
+244b9e0 (HEAD -> docs/tp4-finalize) docs(tp4): clarify merged pull requests
+434fc15 (tag: v0.2.0, origin/main, main) Merge pull request #3 from mohamedamineAyouni/docs/tp4-final
+a44d297 (origin/docs/tp4-final, docs/tp4-final) docs(git): refresh TP4 repository history
+5e61a41 docs(tp4): add final report
 e0079a1 merge: sync main with GitHub pull requests
-88ead2b (origin/main) Merge pull request #2 from mohamedamineAyouni/feat/threshold-defaults-doc
+88ead2b Merge pull request #2 from mohamedamineAyouni/feat/threshold-defaults-doc
 09b6c4b Merge pull request #1 from mohamedamineAyouni/style/misra-required
 d0d18b6 (origin/feat/threshold-defaults-doc, feat/threshold-defaults-doc) docs(threshold): document default hysteresis
 9e2fe04 (feat/threshold-defaults-a) fix(threshold): set default hysteresis to 4 C
-510296b (tag: v0.2.0) docs(git): record TP4 repository history
+510296b docs(git): record TP4 repository history
 7a207c1 merge: integrate MISRA and SonarQube work
 45b16ab (origin/style/misra-required, style/misra-required) docs(sonar): record ThermoNode analysis results
 d08c507 style(gateway): resolve Pylint findings
